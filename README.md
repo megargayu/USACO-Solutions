@@ -1,4 +1,5 @@
 # USACO (and other CP) solutions
+#### My previous CP repository (in Java) can be found [here](https://github.com/megargayu/USACO-Training).
 This is where all of my competitive programming code resides! Most of this is for USACO, but other sites such as CodeForces and CSES are in here too. All solutions are in C++, but there are also Python files littered around (eg. for stress testing).
 
 ## *Please do not copy and paste the answers from this repo. This is only here for educational purposes, and you will not learn if you copy and paste from here.*
