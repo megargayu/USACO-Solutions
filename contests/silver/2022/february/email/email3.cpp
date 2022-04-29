@@ -41,23 +41,39 @@ int main()
     IndexedIterator iit(emails), start(emails);
     int folderStart = 0, emailStart;
 
-    const auto update = [&]()
+    const function<bool()> update = [&]()
     {
       if (folderStart <= *iit && *iit < folderStart + K)
       {
         --leftToFile[*iit];
         
         // check all emails before this as we updated the folder start
-        if (leftToFile[folderStart] == 0)
+        while (leftToFile[folderStart] == 0 && folderStart < M)
         {
           for (; folderStart < M && leftToFile[folderStart] == 0; ++folderStart);
-          IndexedIterator copy = iit;
-          iit = start;
-          while (iit.i < copy.i)
-            if ()
+          for (IndexedIterator iit2 = start; iit2.i < start.i + min(iit.i, K) && iit2.it != emails.end();)
+          {
+            cout << "done" << endl;
+            if (folderStart <= *iit2 && *iit2 < folderStart + K)
+            {
+              --leftToFile[*iit2];
+
+              //cout << *iit2 << endl;
+              //bool setStart = (start.it == iit2.it);
+              //bool setIit = (iit.it == iit2.it);
+              iit2.it = emails.erase(iit2.it);
+              //if (setStart) start.it = iit2.it;
+              //if (setIit) iit.it = iit2.it;
+              //cout << *iit2 << endl;
+            }
+            else ++iit2;
+          }
         }
 
+        bool setStart = (start.it == iit.it);
         iit.it = emails.erase(iit.it);
+        if (setStart) start.it = iit.it;
+
         return true;
       }
 
