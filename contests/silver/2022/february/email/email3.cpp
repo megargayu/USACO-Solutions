@@ -58,7 +58,7 @@ int main()
             {
               --leftToFile[*iit2];
 
-              //cout << *iit2 << endl;
+              cout << *iit2 << endl;
               //bool setStart = (start.it == iit2.it);
               //bool setIit = (iit.it == iit2.it);
               iit2.it = emails.erase(iit2.it);
@@ -67,6 +67,7 @@ int main()
               //cout << *iit2 << endl;
             }
             else ++iit2;
+            cout << "donex2" << endl;
           }
         }
 

@@ -89,7 +89,7 @@ int main() {
     i = j - 1;
   }
 
-  // TODO: prefix sums might be wrong here
+  // prefix sums might be wrong here
   mi ans = 0;
   for (int i = 0; i < N; ++i)
   {

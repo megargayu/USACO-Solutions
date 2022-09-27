@@ -1,40 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_N 1e5
+#define MAX_N 100000
 
-enum class Direction
+struct Point
 {
-  N, E, S, W
+  int x, y;
 };
 
-map<int, vector<int>> x, y;
+struct MirrorIndex
+{
+  int i, j;
+  bool horiz;
+};
+
+// TODO
+
+vector<Point> poi(MAX_N + 1);
+map<int, vector<int>> xM, yM;
+int N;
+Point laser, barn;
 int main()
 {
   ifstream fin("lasers.in");
   ofstream fout("lasers.out");
 
-  int N, xl, yl, xb, yb;
-  fin >> N >> xl >> yl >> xb >> yb;
-
-  x[yl].push_back(xl); y[xl].push_back(yl);
-  x[yb].push_back(xb); y[xb].push_back(yb);
-  int a, b;
-  for (int i = 1; i <= N; ++i)
+  fin >> N >> laser.x >> laser.y >> barn.x >> barn.y;
+  int left, right, up, down;
+  for (int i = 0; i < N; ++i)
   {
-    fin >> a >> b;
-    x[b].push_back(a);
-    y[a].push_back(b);
+    fin >> poi[i].x >> poi[i].y;
+    xM[poi[i].x].push_back(poi[i].y);
+    yM[poi[i].y].push_back(poi[i].x);
   }
 
-  for (auto &val : x) sort(val.second.begin(), val.second.end());
-  for (auto &val : y) sort(val.second.begin(), val.second.end());
+  poi[N] = barn;
 
-  queue<pair<Direction, pair<int, int>>> q;
-  q.push({ Direction::N, { xl, yl } });
+  for (auto &[x, yArr] : xM) sort(yArr.begin(), yArr.end());
+  for (auto &[y, xArr] : yM) sort(xArr.begin(), xArr.end());
+
+  queue<MirrorIndex> q;
+
   while (!q.empty())
   {
-
+    
   }
 
   return 0;
