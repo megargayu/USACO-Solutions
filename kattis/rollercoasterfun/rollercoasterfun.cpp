@@ -6,6 +6,18 @@
 // b) waste time doing nothing but then save it for later to get a maximum
 //    fun for this time?
 
+/*
+4
+8 9 8
+4 6 4
+6 10 6
+2 6 1
+1
+18
+
+should result in 16, not 18
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
