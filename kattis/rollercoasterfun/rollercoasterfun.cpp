@@ -61,6 +61,7 @@ int main()
           k[time] = k[time - t[i]];
           ++k[time][i]; // go on this ride one more time
         }
+        // TODO: if newFun == dp[time], set minimum for all rides
       }
     }
 
