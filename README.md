@@ -8,7 +8,7 @@ This is where all of my competitive programming code resides! Most of this is fo
 
 ## Structure
 
-**Note:** Some of these "solutions" might not work (because I was too lazy or forgot to implement them), so make sure to check if they make sense and if they produce the expected results on the grader when tested. In general, most problems should be solved to 100%, but whenever there is a `// TODO` comment or the code looks incomplete, it's probably not ready.
+**Note:** Some of these "solutions" might not work (because I was too lazy or forgot to implement them), so make sure to check if they make sense and if they produce the expected results on the grader when tested. In general, most problems should be solved to 100%, but whenever there is a `// TODO` comment, a `// NOTE`, or the code looks incomplete, it's probably not completely solved.
 
 - `/contests` contains all of my solutions to USACO problems, and to find a certain problem, navigate like this: `/contests/{division}/{year}/{name}/{name}.cpp`. For contests after or during the 2020 December contest, since there is no problem name, `{name}` is made up based on the context of the full title of the problem. I also sometimes add multiple files for reiterations - the last one is usually correct.
 - `/cf`, `/cses`, `/kattis`, `/leetcode`, and `/google` hold all [Codeforces](https://codeforces.com/), [CSES](https://cses.fi/), [Kattis](https://open.kattis.com/), [LeetCode](https://leetcode.com/), and [Google](https://codingcompetitions.withgoogle.com/) problems I have solved, respectively. These should have the URLs to the original problems at the top, and the names are made up for these as well.
