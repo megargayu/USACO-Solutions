@@ -1,4 +1,5 @@
 // https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ff43/0000000000337b4d
+// NOTE: This solution only solves the first test case set.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -8,8 +9,6 @@ using namespace std;
 
 vector<int> vals(MAX_N + 1);
 vector<ll> ps(MAX_N + 1), mps(MAX_N + 1);
-
-// TODO: solve whole problem with segtrees?
 
 int main()
 {
