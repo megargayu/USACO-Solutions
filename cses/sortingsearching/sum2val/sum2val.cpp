@@ -1,28 +1,24 @@
 // https://cses.fi/problemset/task/1640/
-
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 #define MAX_N 200000
 #define ll long long
-
+ 
 array<pair<ll, int>, MAX_N> arr;
 int main()
 {
-  int n, x;
+  ll n, x;
   cin >> n >> x;
-
+ 
   for (int i = 0; i < n; ++i)
   {
     cin >> arr[i].first;
     arr[i].second = i;
   }
   
-  sort(arr.begin(), arr.begin() + n, [](const auto &a, const auto &b)
-  {
-    return a.first < b.first;
-  });
-
+  sort(arr.begin(), arr.begin() + n);
+ 
   int i = 0, j = n - 1;
   while (i < j)
   {
@@ -34,7 +30,7 @@ int main()
       return 0;
     }
   }
-
+ 
   cout << "IMPOSSIBLE\n";
   return 0;
 }
