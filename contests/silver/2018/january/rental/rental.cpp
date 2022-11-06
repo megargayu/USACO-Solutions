@@ -19,56 +19,91 @@ int main()
   int N, M, R;
   fin >> N >> M >> R;
 
-  int i; ll rentedMoney = 0;
-  for (i = 0; i < N; ++i) fin >> cows[i];
-  for (i = 0; i < M; ++i) fin >> stores[i].quantity >> stores[i].money;
-  for (i = 0; i < R; ++i) fin >> rentals[i], rentedMoney += rentals[i];
+  int i;
+  for (i = 0; i < N; ++i)
+    fin >> cows[i];
+
+  ll totalUnits = 0;
+  for (i = 0; i < M; ++i)
+  {
+    fin >> stores[i].quantity >> stores[i].money;
+    totalUnits += stores[i].quantity;
+  }
+
+  for (i = 0; i < R; ++i)
+    fin >> rentals[i];
 
   sort(cows.begin(), cows.begin() + N, greater<int>());
   sort(stores.begin(), stores.begin() + M, [](const auto &a, const auto &b)
-  { return a.money > b.money; });
+       { return a.money > b.money; });
   sort(rentals.begin(), rentals.begin() + R);
 
-  if (R + M <= N)
+  ll ans = 0;
+  ll curr = 0;
+  for (i = R - 1; i >= R - min(R, N); --i)
+    curr += rentals[i];
+  ans = max(ans, curr);
+
+  // if we can milk more than we can sell out of the first N - R
+  // cows, then sell the first N - R cows and rent the rest of the R cows
+  ll totalCowMilk = 0;
+  for (int i = 0; i < N - R; ++i)
+    totalCowMilk += cows[i];
+
+  if (totalCowMilk >= totalUnits)
   {
-    ll ans = rentedMoney;
     for (int i = 0; i < M; ++i)
-      ans += stores[i].quantity * stores[i].
+      curr += stores[i].quantity * stores[i].money;
+    fout << curr << '\n';
+    return 0;
   }
 
-  // TODO: check if R > M or R < M
-  // rent out worst cows
-  ll soldMoney = 0;
+  // try renting out all cows
+  ll rent = 0;
+  for (int i = 0; i < min(R, N); ++i)
+    rent += rentals[i];
+  ans = max(ans, rent);
+
+  ll milked = 0;
+  int storeI = 0, rentalsI = N < R ? R - N : 0;
   for (int i = 0; i < N; ++i)
   {
-    
-  }
+    // cow 0..i are milked (inclusive) and cows (i+1)..(n-1) are rented out (inclusive)
+    ll milkSold = milked;
+    milked += cows[i];
 
-  ll maxMoney = rentedMoney;
-  int gMilked = 0, gSold = 0, currStore = 0;
-  for (int currMilked = 0; currMilked < N; ++currMilked)
-  {
-    gMilked += cows[currMilked];
-    while (gSold < gMilked)
+    while (storeI < M)
     {
-      if (stores[currStore].quantity <= gMilked - gSold)
-      { // sell all the milk possible to this store if we can
-        gSold += stores[currStore].quantity - stores[currStore].bought;
-        soldMoney += (stores[currStore].quantity - stores[currStore].bought) * stores[currStore].money;
-        stores[currStore].bought = stores[currStore].quantity;
-        ++currStore;
-      } else
-      { // otherwise, just sell the rest of the milk to this store
-        soldMoney += (gMilked - gSold) * stores[currStore].money;
-        gSold = gMilked;
-      }
-    }
-    rentedMoney -= rentals[currMilked];
-    cout << gMilked << ' ' << rentedMoney << ' ' << soldMoney << '\n';
+      Store &store = stores[storeI];
+      const int units = store.quantity - store.bought;
 
-    maxMoney = max(maxMoney, soldMoney + rentedMoney);
+      // this is the last store we can sell to, sell and break out of loop
+      if (milkSold + units >= milked)
+      {
+        const int unitsToSell = milked - milkSold;
+        store.bought += unitsToSell;
+        curr += unitsToSell * store.money;
+        milkSold = milked;
+        break;
+      }
+
+      // sell everything to this store and continue
+      curr += units * store.money;
+      store.bought = store.quantity;
+      milkSold += units;
+      ++storeI;
+    }
+
+    if (i >= N - R)
+    {
+      curr -= rentals[rentalsI];
+      ++rentalsI;
+    }
+
+    ans = max(ans, curr);
   }
-  cout << maxMoney << '\n';
+
+  fout << ans << '\n';
 
   return 0;
 }
