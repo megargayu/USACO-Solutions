@@ -6,10 +6,10 @@ def gen_input():
   def get_rand(len):
     return "".join(choice(ascii_letters) for _ in range(len))
 
-  N = randint(1, 3)
+  N = randint(1, 10)
   testcases = []
   for i in range(N):
-    length = randint(1, 5)
+    length = randint(1, 100)
     testcases.append(f"{get_rand(length)}\n{get_rand(length)}")
   newline = "\n"
   return f"{N}\n{newline.join(testcases)}\n"

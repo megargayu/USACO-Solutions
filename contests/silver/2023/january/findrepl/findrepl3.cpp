@@ -72,6 +72,13 @@ int solve()
     }
   }
 
+  vector<bool> tmpSeen(52, false);
+  for (int i = 0; i < b.size(); ++i)
+    tmpSeen[toInt(b[i])] = true;
+  
+  if (count(tmpSeen.begin(), tmpSeen.end(), true) == 52 && a != b)
+    return -1;
+
   // remove all self loops
   for (int i = 0; i < 52; ++i)
     if (adj[i] == i)
