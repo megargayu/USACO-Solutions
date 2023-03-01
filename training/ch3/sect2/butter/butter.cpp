@@ -12,6 +12,8 @@ using namespace std;
 #define MAX_C 1450
 #define INF 1000000000
 
+// TODO
+
 int N, P, C;
 vector<int> cows(MAX_N);
 vector<vector<pair<int, int>>> adj(MAX_C);
