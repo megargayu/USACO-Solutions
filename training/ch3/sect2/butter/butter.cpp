@@ -11,6 +11,7 @@ using namespace std;
 #define MAX_P 800
 #define MAX_C 1450
 #define INF 1000000000
+#define pii pair<int, int>
 
 // TODO
 
@@ -18,46 +19,72 @@ int N, P, C;
 vector<int> cows(MAX_N);
 vector<vector<pair<int, int>>> adj(MAX_C);
 // dist of each pasture to each other pasture
-vector<vector<int>> dist(MAX_P, vector<int>(MAX_P, INF));
+vector<int> dist(MAX_P);
 
-void dijkstra(int pasture)
+void dijkstra(int start)
 {
-    priority_queue<int, vector<int>, greater<int>> q;
-    for (int i = 0; i < P; ++i)
-        if (i != pasture)
-            q.push(i);
+  vector<bool> seen(MAX_P, false);
+  priority_queue<pii, vector<pii>, greater<pii>> q;
+  fill(dist.begin(), dist.begin() + P, INF);
 
-    // this cow's distance to the pasture it's on is 0
-    dist[][cow] = 0;
+  q.push({0, start});
 
-    while (!q.empty())
+  dist[start] = 0;
+  while (!q.empty())
+  {
+    const auto v = q.top().second;
+    q.pop();
+
+    if (seen[v]) continue;
+    seen[v] = true;
+    
+    for (const auto p : adj[v])
     {
-        int u = q.top();
+      const auto [b, w] = p;
+      if (dist[v] + w < dist[b])
+      {
+        dist[b] = dist[v] + w;
+        q.push({dist[b], b});
+      }
     }
+  }
 }
 
 int main()
 {
-    ifstream fin("butter.in");
-    ofstream fout("butter.out");
+  freopen("butter.in", "r", stdin);
+  freopen("butter.out", "w", stdout);
 
-    fin >> N >> P >> C;
-    for (int i = 0; i < N; ++i)
-    {
-        fin >> cows[i];
-        --cows[i];
-    }
+  cin >> N >> P >> C;
+  for (int i = 0; i < N; ++i)
+  {
+    cin >> cows[i];
+    --cows[i];
+  }
+
+  int a, b, w;
+  for (int i = 0; i < C; ++i)
+  {
+    cin >> a >> b >> w;
+    --a, --b;
+    adj[a].push_back({b, w});
+    adj[b].push_back({a, w});
+  }
+
+  int ans = INF;
+  for (int i = 0; i < P; ++i)
+  {
+    // what if we put the butter in this pasture?
+    dijkstra(i);
+
+    int curr = 0;
+    for (int j = 0; j < N; ++j)
+      curr += dist[cows[j]];
     
-    int a, b, w;
-    for (int i = 0; i < C; ++i)
-    {
-        fin >> a >> b >> w;
-        --a, --b;
-        adj[a].push_back({ b, w });
-        adj[b].push_back({ a, w });
-    }
+    ans = min(curr, ans);
+  }
 
+  cout << ans << '\n';
 
-
-    return 0;
+  return 0;
 }
