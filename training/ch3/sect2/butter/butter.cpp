@@ -13,8 +13,6 @@ using namespace std;
 #define INF 1000000000
 #define pii pair<int, int>
 
-// TODO
-
 int N, P, C;
 vector<int> cows(MAX_N);
 vector<vector<pair<int, int>>> adj(MAX_C);
@@ -35,9 +33,10 @@ void dijkstra(int start)
     const auto v = q.top().second;
     q.pop();
 
-    if (seen[v]) continue;
+    if (seen[v])
+      continue;
     seen[v] = true;
-    
+
     for (const auto p : adj[v])
     {
       const auto [b, w] = p;
@@ -80,7 +79,7 @@ int main()
     int curr = 0;
     for (int j = 0; j < N; ++j)
       curr += dist[cows[j]];
-    
+
     ans = min(curr, ans);
   }
 
