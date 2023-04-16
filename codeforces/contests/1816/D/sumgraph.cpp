@@ -66,11 +66,11 @@ bool solve()
   // output answer
   cout << "! ";
 
-  // assume 1 is the endpoint
+  // assume endpoint is 1
   for (int i = 0; i < n; ++i)
     cout << value[enddiffs[i]] << ' ';
   
-  // assume currMaxI is the endpoint
+  // assume endpoint is value[n - 1] (furthest distance from 1)
   for (int i = 0; i < n - 1; ++i)
     cout << value[n - enddiffs[i] - 1] << ' ';
 
