@@ -18,7 +18,6 @@ void solve()
     counter -= __builtin_ctz(a[i]);
 
   counter = max(counter, 0);
-  // cout << counter << '\n';
 
   priority_queue<int> best_2s;
   
@@ -32,7 +31,6 @@ void solve()
     if (counter >= best_2s.top())
     {
       counter -= best_2s.top();
-      // cout << "picked: " << best_2s.top() << '\n';
       ++answer;
     }
 
@@ -47,8 +45,6 @@ int main()
   num_2[0] = 0;
   for (int i = 1; i <= num_2.size(); ++i)
     num_2[i] = i % 2 == 0 ? num_2[i / 2] + 1 : 0;
-
-
 
   int T;
   cin >> T;
