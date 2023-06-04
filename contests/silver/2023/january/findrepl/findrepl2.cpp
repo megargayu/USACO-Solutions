@@ -14,7 +14,7 @@ int toInt(char c)
 
 void dfs(int v, vector<bool> &vis, vector<int> &onStack, vector<vector<int>> &adj)
 {
-  // TODO: detect cycle
+  // detect cycle
   vis[v] = onStack[v] = true;
 
   for (const int &w : adj[v])

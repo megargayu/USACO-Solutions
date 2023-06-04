@@ -16,7 +16,7 @@ vector<int> inCycle;
 
 bool dfs(int v, vector<bool> &vis, vector<bool> &onStack, vector<int> &adj)
 {
-  // TODO: only return cycle, not the whole stack!
+  // ponly return cycle, not the whole stack!
   vis[v] = onStack[v] = true;
 
   if (adj[v] == -1)

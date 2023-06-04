@@ -2,8 +2,6 @@
 
 // DOES NOT WORK because it doesn't check each starting portal
 
-// TODO
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -18,7 +16,7 @@ int solve()
   if (fromL.begin()->first > C)
     return 0;
 
-  // TODO: we cannot check from the minimum portal!! must go over every possible startng portal and check from there
+  // we cannot check from the minimum portal!! must go over every possible startng portal and check from there
   int money = fromL.begin()->first, ans = 0;
   fromR.erase({iToR[fromL.begin()->second], fromL.begin()->second});
   fromL.erase(fromL.begin());

@@ -44,7 +44,6 @@ void moveHay(int a, int b, ll x)
 void dfs2(int v)
 {
   vis[v] = true;
-  
 
   // suck hay up
   for (const int &w : adj[v])

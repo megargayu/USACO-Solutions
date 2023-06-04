@@ -1,7 +1,5 @@
 // https://cses.fi/problemset/task/1632
 
-// TODO
-
 #include <bits/stdc++.h>
 using namespace std;
 
